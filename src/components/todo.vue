@@ -1,35 +1,46 @@
 <template lang="pug">
   div
     div.todo
-      todo-input(
-        @addTodo="addTodo"
-      )
+      todo-input
       todo-list(
         v-if="todos.length > 0"
         :todos="filteredTodos"
-        @removeTodo="removeTodo"
-        @checkTodo="checkTodo"
-        @filterTodos="filterTodos"
       )
     pre {{todos}}
     pre {{filter}}
 </template>
-// ----------------script-------------------------------
+// ----------------script----------------------------------------
 <script>
 import todoInput from "./todoInput";
 import todoList from "./todoList";
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      todos: [],
-      filter: 'all'
+      // todos: [],
+      // filter: 'all'
     };
   },
   components: {
     todoInput,
     todoList
   },
+  mounted() {
+    // setTimeout(() => {
+    //   console.log(this.todoByID(3));
+    // }, 6000);
+    
+    this.fetchItems();
+  },
+  methods: {
+    ...mapActions(['fetchItems'])
+  },
   computed: {
+    ...mapState({
+      todos: state => state.todos.todos,
+      filter: state => state.todos.filter
+    }),
+    ...mapGetters(['todoByID']),
     filteredTodos() {
       switch(this.filter) {
         case 'all' :
@@ -41,23 +52,9 @@ export default {
       }
     }
   },
-  methods: {
-    addTodo(todo) {
-      this.todos.push(todo);
-    },
-    removeTodo(todoID) {
-      this.todos = this.todos.filter(item => item.id !== todoID);
-    },
-    checkTodo(todo) {
-      this.todos = this.todos.map(item => (item.id === todo.id ? todo : item));
-    },
-    filterTodos(filter) {
-      this.filter = filter;
-    }
-  }
 };
 </script>
-// ----------------style-------------------------------
+// ----------------style----------------------------------------------
 <style lang="scss" scoped>
 .todo {
   margin-top: 40px;

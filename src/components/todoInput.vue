@@ -7,12 +7,13 @@
       autofocus
       v-model="todo.name"
       :class="{'valid-error' : validation.hasError('todo.name')}"
-      @keydown.enter="addTodo"
+      @keydown.enter="addNewTodo"
     ).input
 </template>
 // ----------------script-------------------------------
 <script>
 import { Validator } from "simple-vue-validator";
+import { mapMutations } from "vuex";
 let uniqId = 0;
 export default {
   mixins: [require("simple-vue-validator").mixin],
@@ -31,13 +32,17 @@ export default {
     };
   },
   methods: {
-    addTodo() {
+    ...mapMutations(['addTodo']),
+    addNewTodo() {
       this.$validate().then(success => {
         if (!success) return;
         uniqId++;
+
         this.todo.id = uniqId;
-        this.$emit("addTodo", { ...this.todo });
+        this.addTodo({ ...this.todo });
+
         this.todo.name = "";
+
         this.validation.reset();
       })
     }
