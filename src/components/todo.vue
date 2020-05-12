@@ -17,8 +17,6 @@ import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      // todos: [],
-      // filter: 'all'
     };
   },
   components: {
@@ -26,9 +24,9 @@ export default {
     todoList
   },
   mounted() {
-    // setTimeout(() => {
-    //   console.log(this.todoByID(3));
-    // }, 6000);
+    setTimeout(() => {
+      console.log(this.todoByID(3));
+    }, 6000);
     
     this.fetchItems();
   },
@@ -43,11 +41,11 @@ export default {
     ...mapGetters(['todoByID']),
     filteredTodos() {
       switch(this.filter) {
-        case 'all' :
+        case 'All' :
           return this.todos;
-        case 'active' :
+        case 'Active' :
           return this.todos.filter(item => item.checked === false);
-        case 'completed' :
+        case 'Completed' :
           return this.todos.filter(item => item.checked);
       }
     }

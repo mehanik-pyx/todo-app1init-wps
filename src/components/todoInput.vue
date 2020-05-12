@@ -37,12 +37,9 @@ export default {
       this.$validate().then(success => {
         if (!success) return;
         uniqId++;
-
         this.todo.id = uniqId;
         this.addTodo({ ...this.todo });
-
         this.todo.name = "";
-
         this.validation.reset();
       })
     }

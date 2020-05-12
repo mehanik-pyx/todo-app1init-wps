@@ -6,6 +6,7 @@
     :class="{active: currentFilter === filter}"
     @click="filterCurrentTodos(filter)"
     ) {{filter}}
+    //- button Clear completed
 </template>
 // ----------------script-------------------------------
 <script>
@@ -13,8 +14,8 @@ import { mapMutations } from "vuex";
 export default {
   data() {
     return {
-      filters: ["all", "active", "completed"],
-      currentFilter: 'all'
+      filters: ["All", "Active", "Completed"],
+      currentFilter: 'All'
     };
   },
   methods: {

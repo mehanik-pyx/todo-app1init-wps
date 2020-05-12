@@ -1,7 +1,7 @@
 const todos = {
   state: {
     todos: [],
-    filter: 'all'
+    filter: 'All'
   },
   mutations: {
     addTodo(state, todo) {
