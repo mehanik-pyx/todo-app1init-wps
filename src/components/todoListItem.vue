@@ -9,6 +9,11 @@
       ).input
     .title {{todo.name}}
   .button
+    router-link(
+      tag="button"
+      :to="`/view/${todo.name}`"
+    ).view ->
+  .button
     button(
       type="button"
       @click="removeTodo"
@@ -43,7 +48,14 @@ export default {
     .remove {
       visibility: visible;
     }
+    .view {
+      visibility: visible;
+    }
   }
+}
+.view {
+  visibility: hidden;
+  cursor: pointer;
 }
 .checked .title {
   text-decoration: line-through;

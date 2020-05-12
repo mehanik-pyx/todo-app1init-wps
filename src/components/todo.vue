@@ -60,7 +60,7 @@ export default {
 // ----------------style-------------------------------
 <style lang="scss" scoped>
 .todo {
-  margin-top: 0px;
+  margin-top: 40px;
   background: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   color: #4d4d4d;
