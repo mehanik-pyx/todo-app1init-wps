@@ -1,12 +1,16 @@
 <template lang="pug">
   div
-    button(
+    button.visible(
     v-for="filter in filters"
     type="button"
     :class="{active: currentFilter === filter}"
     @click="filterCurrentTodos(filter)"
     ) {{filter}}
-    //- button Clear completed
+    button(
+      type="button"
+      :class="{visible: completedTodos.length > 0}"
+      @click="clearCompletedTodos"
+      ) Clear completed
 </template>
 // ----------------script-------------------------------
 <script>
@@ -18,12 +22,21 @@ export default {
       currentFilter: 'All'
     };
   },
+  props: {
+    completedTodos: Array
+  },
   methods: {
-    ...mapMutations(['filterTodos']),
+    conlog() {
+      console.log("click");
+    },
+    ...mapMutations(['filterTodos', 'clearCompleted']),
     filterCurrentTodos(filter) {
       this.currentFilter = filter;
       this.filterTodos(filter);
-    }
+    },
+    clearCompletedTodos(todos, completedTodos) {
+      this.clearCompleted(this.completedTodos);
+    },
   }
 };
 </script>
@@ -41,8 +54,20 @@ button {
   &.active {
     border-color: rgba(175, 47, 47, 0.2);
   }
+  &:hover {
+    border-color: rgba(175, 47, 47, 0.1);
+  }
   &:last-child {
     margin-right: 0;
+    float: right;
+    visibility: hidden;
+    border: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &.visible {
+    visibility: visible;
   }
 }
 </style>

@@ -16,25 +16,28 @@ const todos = {
     filterTodos(state, filter) {
       state.filter = filter;
     },
-    testMutation(state, payload) {
-      console.log('testMutation', payload);
+    clearCompleted(state, completedTodos) {
+      state.todos = state.todos.filter(el => !completedTodos.includes(el))
     },
+    // testMutation(state, payload) {
+    //   console.log('testMutation', payload);
+    // },
   },
   actions: {
-    fetchItems(store) {
-      store.commit('testMutation', 42);
-      store.dispatch('anotherAction', 66);
-      //??? как передать "66" в anotherAction ???
-      console.log(store);
-    },
-    anotherAction(store) {
-      console.log('another action');
-    }
+    // fetchItems(store) {
+    //   store.commit('testMutation', 42);
+    //   store.dispatch('anotherAction', 66);
+    //   //??? как передать "66" в anotherAction ???
+    //   console.log(store);
+    // },
+    // anotherAction(store) {
+    //   console.log('another action');
+    // }
   },
   getters: {
-    todoByID:(state) => (id) => {
-    return state.todos.filter(item => item.id === id)
-    }
+    // todoByID:(state) => (id) => {
+    // return state.todos.filter(item => item.id === id)
+    // }
   },
 }
 export default todos;

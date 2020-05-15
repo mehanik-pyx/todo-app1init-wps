@@ -8,9 +8,9 @@
           )
     .footer
       .footer-content
-        .counter {{todos.length}} items left
+        .counter {{todos.length - completedTodos.length}} items left to do 
         .filter
-          todo-list-filter
+          todo-list-filter(:completedTodos="completedTodos")
 </template>
 // ----------------script-------------------------------
 <script>
@@ -18,16 +18,18 @@ import todoListFilter from "./todoListFilter";
 import todoListItem from "./todoListItem";
 export default {
   props: {
-    todos: Array
+    todos: Array,
+    completedTodos: Array
+    
   },
   components: {
     todoListFilter,
     todoListItem
   },
   methods: {
-    filterTodos(filter) {
-      this.$emit("filterTodos", filter);
-    }
+    // filterTodos(filter) {
+    //   this.$emit("filterTodos", filter);
+    // }
   }
 };
 </script>

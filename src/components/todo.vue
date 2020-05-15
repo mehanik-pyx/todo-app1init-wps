@@ -5,9 +5,15 @@
       todo-list(
         v-if="todos.length > 0"
         :todos="filteredTodos"
+        :completedTodos="completedTodos"
       )
-    pre {{todos}}
-    pre {{filter}}
+    pre todos: {{todos}}
+    //- pre {{filter}}
+    //- pre {{state}}
+    pre completedTodos: {{completedTodos}}
+    pre filteredTodos: {{filteredTodos}}
+    //- pre {{todos - filteredTodos}}
+    pre todos-completedTodos: {{todos.filter(el => !completedTodos.includes(el))}}
 </template>
 // ----------------script----------------------------------------
 <script>
@@ -24,21 +30,22 @@ export default {
     todoList
   },
   mounted() {
-    setTimeout(() => {
-      console.log(this.todoByID(3));
-    }, 6000);
+    // setTimeout(() => {
+    //   console.log(this.todoByID(3));
+    // }, 6000);
     
-    this.fetchItems();
+    // this.fetchItems();
   },
   methods: {
-    ...mapActions(['fetchItems'])
+    // ...mapActions(['fetchItems'])
   },
   computed: {
+    // ...mapGetters(['todoByID']),
     ...mapState({
       todos: state => state.todos.todos,
-      filter: state => state.todos.filter
+      filter: state => state.todos.filter,
+      // state: state => state
     }),
-    ...mapGetters(['todoByID']),
     filteredTodos() {
       switch(this.filter) {
         case 'All' :
@@ -48,6 +55,9 @@ export default {
         case 'Completed' :
           return this.todos.filter(item => item.checked);
       }
+    },
+    completedTodos(){
+       return this.todos.filter(item => item.checked);
     }
   },
 };
