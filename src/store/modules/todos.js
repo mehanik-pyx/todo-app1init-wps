@@ -13,6 +13,18 @@ const todos = {
     checkTodo(state, todo) {
       state.todos = state.todos.map(item => (item.id === todo.id ? todo : item));
     },
+    toggleAllTodos(state, checked) {
+      // console.log('before state', checked);
+      // console.log('before state', state);
+      state.todos.forEach(item => {
+        // console.log(todo);
+        // console.log(todo.checked);
+        // console.log(checked);
+        item.checked = checked;
+        // todo.checked = checked;
+      })
+      // console.log('after state', checked);
+    },
     filterTodos(state, filter) {
       state.filter = filter;
     },

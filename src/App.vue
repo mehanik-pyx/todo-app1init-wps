@@ -25,12 +25,10 @@ body {
   font-weight: 300;
   background: #f5f5f5;
 }
-
 .container {
   width: 600px;
   margin: 0 auto;
 }
-
 ul {
   margin: 0;
   padding: 0;
@@ -39,8 +37,10 @@ ul {
     list-style: none;
   }
 }
-
 * {
   box-sizing: border-box;
+}
+input[type="checkbox"] {
+  cursor: pointer;
 }
 </style>

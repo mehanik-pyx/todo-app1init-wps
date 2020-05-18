@@ -1,19 +1,27 @@
 <template lang="pug">
   .todo-list
+    input(
+      type="checkbox"
+      title="toggle-all"
+      @change="toggleAll"
+      ).toggle-all
     .content
       ul.list
         li.item(v-for="todo in todos")
+          //- pre {{todos}}
           todo-list-item(
             :todo="todo"
           )
     .footer
       .footer-content
-        .counter {{todos.length - completedTodos.length}} items left to do 
+        .counter {{todos.length - completedTodos.length > 0 ? todos.length - completedTodos.length : 0}} items left to do
+         //- это костыль, надо написать это нормально
         .filter
           todo-list-filter(:completedTodos="completedTodos")
 </template>
 // ----------------script-------------------------------
 <script>
+import { mapMutations } from "vuex";
 import todoListFilter from "./todoListFilter";
 import todoListItem from "./todoListItem";
 export default {
@@ -27,14 +35,26 @@ export default {
     todoListItem
   },
   methods: {
-    // filterTodos(filter) {
-    //   this.$emit("filterTodos", filter);
-    // }
-  }
+    ...mapMutations(['toggleAllTodos', 'checkTodo']),
+    toggleAll(e) {
+      // console.log(e.target.value);
+      // console.log('before', e.target.checked);
+      this.toggleAllTodos(e.target.checked);
+      // console.log('after', e.target.checked);
+    },
+  },
 };
 </script>
 // ----------------style-------------------------------
 <style lang="scss" scoped>
+.todo-list {
+  position: relative;
+}
+.toggle-all {
+  position: absolute;
+  top: -42px;
+  left: 20px;
+}
 .list {
   font-size: 24px;
   border-bottom: 1px solid #ededed;

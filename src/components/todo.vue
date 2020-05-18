@@ -7,13 +7,15 @@
         :todos="filteredTodos"
         :completedTodos="completedTodos"
       )
-    pre todos: {{todos}}
-    //- pre {{filter}}
-    //- pre {{state}}
-    pre completedTodos: {{completedTodos}}
-    pre filteredTodos: {{filteredTodos}}
-    //- pre {{todos - filteredTodos}}
-    pre todos-completedTodos: {{todos.filter(el => !completedTodos.includes(el))}}
+    pre todos: {{todos.length}}
+    //- pre todo: {{todo}}
+    //- pre filter: {{filter}}
+    //- pre state: {{state}}
+    pre completedTodos: {{completedTodos.length}}
+    pre todos.length - completedTodos.length: {{todos.length - completedTodos.length}}
+    //- pre filteredTodos: {{filteredTodos}}
+    //- pre todos - filteredTodos: {{todos - filteredTodos}}
+    //- pre todos-completedTodos: {{todos.filter(el => !completedTodos.includes(el))}}
 </template>
 // ----------------script----------------------------------------
 <script>

@@ -1,23 +1,28 @@
 <template lang="pug">
-.todo-item(:class="{checked: todo.checked}")
-  label.label
-    .input-block
-      input(
-        type="checkbox"
-        @change="checkTodoAsCompleted"
-        :checked="todo.checked"
-      ).input
-    .title {{todo.name}}
-  .button
-    router-link(
-      tag="button"
-      :to="`/view/${todo.name}`"
-    ).view ->
-  .button
-    button(
-      type="button"
-      @click="removeExistedTodo"
-    ).remove x
+div
+  .todo-item(:class="{checked: todo.checked}")
+    label.label
+      .input-block
+        input(
+          type="checkbox"
+          title="toggle"
+          @change="checkTodoAsCompleted"
+          :checked="todo.checked"
+        ).toggle
+      .title {{todo.name}}
+    .button
+      router-link(
+        tag="button"
+        title="view"
+        :to="`/view/${todo.name}`"
+      ).view ->
+    .button
+      button(
+        type="button"
+        title="remove"
+        @click="removeExistedTodo"
+      ).remove x
+  //- input.edit
 </template>
 // ----------------script-------------------------------
 <script>
@@ -42,7 +47,7 @@ export default {
 };
 </script>
 // ----------------style-------------------------------
-<style lang="scss">
+<style lang="scss" scoped>
 .todo-item {
   display: flex;
   align-items: center;

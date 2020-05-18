@@ -9,6 +9,7 @@
       :class="{'valid-error' : validation.hasError('todo.name')}"
       @keydown.enter="addNewTodo"
     ).input
+    //- input(type="checkbox")
 </template>
 // ----------------script-------------------------------
 <script>
